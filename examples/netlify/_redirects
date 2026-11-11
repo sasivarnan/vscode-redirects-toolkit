@@ -1,0 +1,6 @@
+# Select Netlify with Redirects: Select Host.
+/old /new 301!
+/store id=:id /blog/:id 301
+/ /en 302 Language=en
+/ /au 302 Country=au,nz
+/* /index.html 200

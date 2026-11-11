@@ -1,0 +1,141 @@
+{
+  "name": "redirects-toolkit",
+  "displayName": "Redirects Toolkit — Netlify & Cloudflare",
+  "description": "Syntax highlighting, column formatting, and validation for Netlify and Cloudflare Pages _redirects files.",
+  "version": "0.1.0",
+  "publisher": "sasivarnan",
+  "author": "Sasivarnan",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.96.0",
+    "node": ">=22"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Linters"
+  ],
+  "keywords": [
+    "redirects",
+    "_redirects",
+    "netlify",
+    "cloudflare",
+    "cloudflare-pages",
+    "formatter",
+    "validation",
+    "syntax-highlighting"
+  ],
+  "main": "./dist/extension.js",
+  "browser": "./dist/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "redirects",
+        "aliases": [
+          "Redirects",
+          "redirects"
+        ],
+        "filenames": [
+          "_redirects"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "redirects",
+        "scopeName": "source.redirects",
+        "path": "./syntaxes/redirects.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "redirects.selectHost",
+        "title": "Redirects: Select Host"
+      }
+    ],
+    "configuration": {
+      "title": "Redirects Toolkit",
+      "properties": {
+        "redirects.host": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "cloudflare",
+            "netlify",
+            "generic"
+          ],
+          "default": "auto",
+          "scope": "resource",
+          "markdownDescription": "Host rules to check. Auto looks for `netlify.toml` or `wrangler.toml`, `wrangler.json`, or `wrangler.jsonc` in the file's workspace folder. If both or neither are found, only common syntax checks run."
+        },
+        "redirects.validation.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "description": "Show rule errors and warnings in Problems."
+        },
+        "redirects.format.columnGap": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 2,
+          "scope": "resource",
+          "description": "Minimum number of spaces between columns."
+        },
+        "redirects.format.maxPadding": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 120,
+          "default": 40,
+          "scope": "resource",
+          "description": "Maximum extra alignment spaces per column. Long values use the minimum gap. Set to 0 to disable column alignment."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "[redirects]": {
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && esbuild src/extension.ts --bundle --platform=browser --format=cjs --external:vscode --outfile=dist/extension.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "watch": "esbuild src/extension.ts --bundle --platform=browser --format=cjs --external:vscode --outfile=dist/extension.js --watch",
+    "lint": "oxlint src tests scripts --deny warnings",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run build && node --test tests/*.test.cjs",
+    "test:editor": "npm run build && node scripts/test-editor.cjs",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm test",
+    "vscode:prepublish": "npm run build",
+    "package": "vsce package --no-dependencies --githubBranch main --out redirects-toolkit-0.1.0.vsix"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "@types/vscode": "1.96.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.6.2",
+    "oxlint": "^1.90.0",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sasivarnan/vscode-redirects-toolkit.git"
+  },
+  "homepage": "https://github.com/sasivarnan/vscode-redirects-toolkit#readme",
+  "bugs": {
+    "url": "https://github.com/sasivarnan/vscode-redirects-toolkit/issues"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Redirects",
+  "scopeName": "source.redirects",
+  "patterns": [
+    {
+      "name": "comment.line.number-sign.redirects",
+      "match": "^\\s*#.*$|(?<=\\s)#.*$"
+    },
+    {
+      "begin": "^(\\s*)(\\S+)",
+      "beginCaptures": {
+        "2": {
+          "name": "entity.name.tag.source.redirects",
+          "patterns": [{ "include": "#parts" }]
+        }
+      },
+      "end": "$",
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.redirects",
+          "match": "(?<=\\s)#.*$"
+        },
+        {
+          "name": "constant.numeric.status.redirects",
+          "match": "(?<=\\s)[1-5][0-9]{2}!?(?=\\s|$)"
+        },
+        {
+          "begin": "(?<=\\s)([A-Za-z_][\\w.-]*)(=)",
+          "beginCaptures": {
+            "1": { "name": "support.type.property-name.redirects" },
+            "2": { "name": "keyword.operator.assignment.redirects" }
+          },
+          "end": "(?=\\s|$)",
+          "contentName": "string.unquoted.condition.redirects",
+          "patterns": [{ "include": "#parts" }]
+        },
+        {
+          "begin": "(?<=\\s)(?=/|https?://)",
+          "end": "(?=\\s|$)",
+          "contentName": "string.unquoted.destination.redirects",
+          "patterns": [{ "include": "#parts" }]
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "parts": {
+      "patterns": [
+        {
+          "name": "variable.parameter.redirects",
+          "match": ":[A-Za-z][A-Za-z0-9_]*"
+        },
+        { "name": "keyword.operator.wildcard.redirects", "match": "\\*" }
+      ]
+    }
+  }
+}

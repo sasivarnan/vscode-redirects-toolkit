@@ -1,0 +1,6 @@
+# Format this file with Format Document.
+/old /new 301
+/blog/* /articles/:splat 302
+
+# Status is optional. Select a host to see its default in hover help.
+/help /support

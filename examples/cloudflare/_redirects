@@ -1,0 +1,5 @@
+# Select Cloudflare Pages with Redirects: Select Host.
+/old /new 301
+/docs/:page /help/:page 302
+/blog/* /articles/:splat 301
+/app/* /index.html 200
