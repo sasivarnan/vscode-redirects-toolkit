@@ -80,20 +80,20 @@ You can also use the VS Code command-line tool:
 code --install-extension ./redirects-toolkit-0.1.0.vsix
 ```
 
-To build the package from the source files, use Node.js 22 or later.
+To build the package from the source files, use Node.js 22 or later and pnpm 12.18.0.
 Get the source files and run these commands:
 
 ```sh
 git clone https://github.com/sasivarnan/vscode-redirects-toolkit.git
 cd vscode-redirects-toolkit
-npm ci
-npm run check
-npm run package
+pnpm install --frozen-lockfile
+pnpm check
+pnpm package
 ```
 
-The package uses the proposed publisher ID `sasivarnan`.
-To publish it, you need a Marketplace account with that publisher ID.
-These commands do not publish the extension.
+The package uses publisher ID `sasivarnan`.
+These commands build a local package.
+See [the publishing steps](docs/publishing.md) to publish through GitHub Actions.
 
 If another extension opens the file, run **Change Language Mode** and select **Redirects**.
 Then use **Format Document With...** to select this extension.
@@ -252,9 +252,9 @@ Use **Redirects: Select Host** to select Netlify or Cloudflare Pages.
 Run these commands in the source folder:
 
 ```sh
-npm ci
-npm run check
-npm run test:editor
+pnpm install --frozen-lockfile
+pnpm check
+pnpm test:editor
 ```
 
 To use the examples, open the source folder in VS Code.

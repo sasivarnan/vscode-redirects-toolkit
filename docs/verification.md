@@ -57,3 +57,22 @@ The first build was local. No Marketplace publication or deployment was made.
 - Added the GitHub description and eight relevant repository topics.
 - Type, lint, formatting, build, all 21 automated tests, and VS Code editor integration tests passed before the first push.
 - Rebuilt the VSIX and confirmed that image and contribution links use the public repository on `main`.
+
+## Trusted publishing and cleanup
+
+Checked on 13 November 2026 (Asia/Kolkata).
+
+- Added `.github/workflows/publish.yml` for the existing Marketplace trusted publishing policy. The Environment field stays empty.
+- The workflow checks and saves a package by default. Publication is an explicit workflow input and is restricted to `main`.
+- The check job has read access. Only the publish job can request an OIDC token.
+- The publish job uses the checked VSIX artifact. It does not rebuild it or use a Personal Access Token.
+- Switched development, tests, documentation, and VS Code tasks to pnpm 12.18.0. Removed the npm lockfile.
+- Updated `@vscode/vsce` from 3.9.2 to 4.1.1 because trusted publishing requires its OIDC support.
+- Replaced `.vscodeignore` with an explicit package file list. Duplicate compiled modules and development files are excluded.
+- Removed the fixed version from the package command and added a package-content regression test.
+- The editor test runner removes its temporary workspace after each run.
+- No runtime code refactor was needed for this release.
+- A frozen pnpm install, type checks, lint, formatting, build, all 22 automated tests, and macOS editor tests passed.
+- Actionlint 1.7.12 accepted the workflow. The validator download matched the upstream SHA-256 checksum.
+- Inspected the VSIX: 11 files, one runtime module, and no workflow, lockfile, source, or test files.
+- Confirmed that `vsce` 4.1.1 supports `--oidc`. No saved publisher credential is needed by the workflow.

@@ -7,4 +7,8 @@
 - Add host selection, hover help, and completion suggestions.
 - Add core, grammar, and editor integration tests.
 
-Local preview release. Not published to the Marketplace.
+- Add pnpm development commands and a locked dependency install.
+- Add trusted publishing through `publish.yml`.
+- Keep development files and duplicate build modules out of the VSIX.
+
+Unpublished release.

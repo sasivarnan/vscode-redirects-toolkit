@@ -3,10 +3,14 @@
   "tasks": [
     {
       "label": "build",
-      "type": "npm",
-      "script": "build",
+      "type": "shell",
       "problemMatcher": "$tsc",
-      "group": { "kind": "build", "isDefault": true }
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "pnpm",
+      "args": ["build"]
     }
   ]
 }

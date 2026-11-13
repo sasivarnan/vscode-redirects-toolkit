@@ -1,0 +1,88 @@
+name: Publish extension
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the checked package to Visual Studio Marketplace
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: marketplace-publish
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Check and package
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Check publish branch
+        if: inputs.publish
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "Publish from the main branch."
+            exit 1
+          fi
+      - name: Install pnpm
+        uses: pnpm/action-setup@a8198c4bff370c8506180b035930dea56dbd5288 # v5
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check source and run tests
+        run: pnpm check
+      - name: Test in VS Code
+        run: xvfb-run -a pnpm test:editor
+      - name: Build VSIX package
+        run: pnpm package
+      - name: Save checked package
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: redirects-toolkit
+          path: "*.vsix"
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    name: Publish to Marketplace
+    needs: check
+    if: inputs.publish && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out checked source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@a8198c4bff370c8506180b035930dea56dbd5288 # v5
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install publishing tool
+        run: pnpm install --frozen-lockfile
+      - name: Download checked package
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
+        with:
+          name: redirects-toolkit
+          path: .artifacts
+      - name: Publish checked package with trusted publishing
+        run: pnpm exec vsce publish --oidc --packagePath .artifacts/*.vsix

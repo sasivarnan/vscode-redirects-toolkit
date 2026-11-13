@@ -113,17 +113,17 @@
     "lint": "oxlint src tests scripts --deny warnings",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "npm run build && node --test tests/*.test.cjs",
-    "test:editor": "npm run build && node scripts/test-editor.cjs",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm test",
-    "vscode:prepublish": "npm run build",
-    "package": "vsce package --no-dependencies --githubBranch main --out redirects-toolkit-0.1.0.vsix"
+    "test": "pnpm build && node --test tests/*.test.cjs",
+    "test:editor": "pnpm build && node scripts/test-editor.cjs",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test",
+    "vscode:prepublish": "pnpm build",
+    "package": "vsce package --no-dependencies --githubBranch main"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",
     "@types/vscode": "1.96.0",
     "@vscode/test-electron": "^2.5.2",
-    "@vscode/vsce": "^3.6.2",
+    "@vscode/vsce": "^4.1.1",
     "oxlint": "^1.90.0",
     "prettier": "^3.9.10",
     "typescript": "^5.9.3",
@@ -137,5 +137,15 @@
   "homepage": "https://github.com/sasivarnan/vscode-redirects-toolkit#readme",
   "bugs": {
     "url": "https://github.com/sasivarnan/vscode-redirects-toolkit/issues"
-  }
+  },
+  "packageManager": "pnpm@12.18.0",
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "dist/extension.js",
+    "language-configuration.json",
+    "syntaxes/redirects.tmLanguage.json",
+    "media/*.png"
+  ]
 }
