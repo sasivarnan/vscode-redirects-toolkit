@@ -85,11 +85,11 @@ Checked on 13 November 2026 (Asia/Kolkata).
 - Changed workflow Node.js versions to 24. Verified the pinned action runtimes, including the updated download action.
 - Added the monochrome imagegen icon and a PNG package check.
 - Added local tests for version preparation, metadata checks, changed source, existing tags, and version commits. The test repositories are temporary and do not push.
-- These changes remain local. The updated workflow has not run on GitHub and no new version has been uploaded.
+- The initial implementation was checked locally before approval to push and publish.
 - The prior package-only GitHub run passed Ubuntu editor tests: https://github.com/sasivarnan/vscode-redirects-toolkit/actions/runs/43434790798.
 - The updated local checks passed under Node.js 24.22.3: type, lint, formatting, build, all 32 tests, and macOS editor tests.
 - Actionlint accepted the updated workflow. Inspected the 12-file VSIX and confirmed that the icon bytes match the selected imagegen output.
-- End-to-end execution of the updated release jobs remains open until these changes are approved and pushed.
+- The updated release jobs later completed successfully in the version 0.1.1 release run below.
 
 ## Version 0.1.1 release follow-up
 
@@ -100,3 +100,13 @@ Checked on 13 November 2026 (Asia/Kolkata).
 - With user approval, resized the selected icon to 256 by 256 pixels without a design change. The original imagegen output is retained.
 - After the fix, all 32 tests, macOS editor tests, type, lint, formatting, build, and package checks passed under Node.js 24.
 - Inspected the VSIX and confirmed the 256-pixel icon and absence of em dashes in its name, README, and runtime text.
+
+## Version 0.1.1 upload completed
+
+- [Release workflow 43440226445](https://github.com/sasivarnan/vscode-redirects-toolkit/actions/runs/43440226445) completed successfully.
+- All 32 tests, source checks, and Ubuntu VS Code editor tests passed under Node.js 24.
+- Marketplace accepted the corrected 0.1.1 package upload.
+- The record job created release commit `0b42583` and annotated tag `v0.1.1` and pushed them atomically.
+- Downloaded and inspected the saved VSIX. Its manifest matches the release source. Its icon is 256 by 256 pixels.
+- Confirmed the title, README, and runtime text contain no em dashes.
+- At the final public listing check, version 0.1.0 was still visible. Verification or listing refresh for 0.1.1 remained pending.
