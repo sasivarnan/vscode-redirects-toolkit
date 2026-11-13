@@ -2,7 +2,7 @@
   "name": "redirects-toolkit",
   "displayName": "Redirects Toolkit for Netlify and Cloudflare",
   "description": "Syntax highlighting, column formatting, and validation for Netlify and Cloudflare Pages _redirects files.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "sasivarnan",
   "author": "Sasivarnan",
   "license": "MIT",

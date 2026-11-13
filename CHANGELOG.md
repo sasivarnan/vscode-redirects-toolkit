@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1
 
 - Add release version selection and a matching Git tag after upload.
 - Use Node.js 24 in GitHub Actions.
