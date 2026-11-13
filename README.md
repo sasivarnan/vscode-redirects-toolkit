@@ -72,15 +72,9 @@ If you have the VSIX package, use these steps:
 1. Open VS Code.
 2. Open the Command Palette.
 3. Run **Extensions: Install from VSIX...**.
-4. Select `redirects-toolkit-0.1.0.vsix`.
+4. Select the generated `.vsix` file.
 
-You can also use the VS Code command-line tool:
-
-```sh
-code --install-extension ./redirects-toolkit-0.1.0.vsix
-```
-
-To build the package from the source files, use Node.js 22 or later and pnpm 12.18.0.
+To build the package from the source files, use Node.js 24 and pnpm 12.18.0.
 Get the source files and run these commands:
 
 ```sh

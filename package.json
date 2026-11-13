@@ -117,7 +117,8 @@
     "test:editor": "pnpm build && node scripts/test-editor.cjs",
     "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test",
     "vscode:prepublish": "pnpm build",
-    "package": "vsce package --no-dependencies --githubBranch main"
+    "package": "vsce package --no-dependencies --githubBranch main",
+    "release:prepare": "node scripts/release.cjs prepare"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",
@@ -147,5 +148,6 @@
     "language-configuration.json",
     "syntaxes/redirects.tmLanguage.json",
     "media/*.png"
-  ]
+  ],
+  "icon": "media/icon.png"
 }

@@ -18,7 +18,7 @@ The editor test uses its own user-data directory and temporary workspace. It doe
 ## Open checks
 
 - Full web extension host and remote-workspace integration tests.
-- Windows and Linux editor checks, and the oldest declared VS Code version (1.96).
+- Windows editor checks and the oldest declared VS Code version (1.96).
 - Manual screen-reader output, keyboard review of host selection, and contrast review across themes.
 - Installation of the VSIX in a normal VS Code profile.
 - Real routing behavior in Netlify and Cloudflare preview deployments.
@@ -76,3 +76,17 @@ Checked on 13 November 2026 (Asia/Kolkata).
 - Actionlint 1.7.12 accepted the workflow. The validator download matched the upstream SHA-256 checksum.
 - Inspected the VSIX: 11 files, one runtime module, and no workflow, lockfile, source, or test files.
 - Confirmed that `vsce` 4.1.1 supports `--oidc`. No saved publisher credential is needed by the workflow.
+
+## Release versions, Node.js 24, and icon
+
+- Added patch, minor, major, and current version choices for publication. Check-only runs keep the current version.
+- Added source and metadata checks before upload and before version recording. A changed `main` or existing tag stops the next step.
+- After upload, a separate job records the version and changelog and creates an annotated tag. Its Git push updates the commit and tag atomically.
+- Changed workflow Node.js versions to 24. Verified the pinned action runtimes, including the updated download action.
+- Added the monochrome imagegen icon and a PNG package check.
+- Added local tests for version preparation, metadata checks, changed source, existing tags, and version commits. The test repositories are temporary and do not push.
+- These changes remain local. The updated workflow has not run on GitHub and no new version has been uploaded.
+- The prior package-only GitHub run passed Ubuntu editor tests: https://github.com/sasivarnan/vscode-redirects-toolkit/actions/runs/43434790798.
+- The updated local checks passed under Node.js 24.22.3: type, lint, formatting, build, all 32 tests, and macOS editor tests.
+- Actionlint accepted the updated workflow. Inspected the 12-file VSIX and confirmed that the icon bytes match the selected imagegen output.
+- End-to-end execution of the updated release jobs remains open until these changes are approved and pushed.

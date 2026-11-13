@@ -4,3 +4,4 @@ node_modules/
 .vscode-test/
 examples/**/_redirects
 pnpm-lock.yaml
+release-output/
