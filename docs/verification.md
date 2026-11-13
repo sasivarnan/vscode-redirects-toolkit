@@ -90,3 +90,13 @@ Checked on 13 November 2026 (Asia/Kolkata).
 - The updated local checks passed under Node.js 24.22.3: type, lint, formatting, build, all 32 tests, and macOS editor tests.
 - Actionlint accepted the updated workflow. Inspected the 12-file VSIX and confirmed that the icon bytes match the selected imagegen output.
 - End-to-end execution of the updated release jobs remains open until these changes are approved and pushed.
+
+## Version 0.1.1 release follow-up
+
+- The first release run passed the Node.js 24 checks, all 32 tests, and Ubuntu editor tests.
+- Marketplace rejected the upload because the generated icon exceeded its maximum dimensions of 1024 by 1024 pixels.
+- Added the maximum dimension check to the icon test.
+- Removed em dashes from the display name, README, and hover help. Added the writing rule to AGENTS.md.
+- With user approval, resized the selected icon to 256 by 256 pixels without a design change. The original imagegen output is retained.
+- After the fix, all 32 tests, macOS editor tests, type, lint, formatting, build, and package checks passed under Node.js 24.
+- Inspected the VSIX and confirmed the 256-pixel icon and absence of em dashes in its name, README, and runtime text.

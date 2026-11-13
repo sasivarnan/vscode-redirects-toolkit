@@ -7,7 +7,9 @@ It uses charcoal on an off-white background.
 The publisher manifest and VSIX package use this PNG file.
 
 The built-in imagegen tool created the icon.
-The selected output was copied into the project without pixel edits.
+The selected output was copied into the project.
+With user approval, a local image tool resized it to 256 by 256 pixels.
+The artwork and color palette stayed unchanged.
 The original output stays in the image generation folder.
 
 ## Final color-edit prompt

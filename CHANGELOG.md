@@ -5,6 +5,7 @@
 - Add release version selection and a matching Git tag after upload.
 - Use Node.js 24 in GitHub Actions.
 - Add the extension icon.
+- Remove em dashes from the name and help text.
 
 ## 0.1.0
 

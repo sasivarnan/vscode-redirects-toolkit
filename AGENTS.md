@@ -1,6 +1,7 @@
 # Project instructions
 
 - Use concise ASD-STE100 Simplified Technical English.
+- Do not use em dashes in the extension name or project content.
 - Read current files and preserve user changes.
 - Write self-documenting code. Add comments only when necessary.
 - Keep host rules separate. Use current official host documentation.

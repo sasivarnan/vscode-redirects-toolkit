@@ -25,7 +25,7 @@ test("the VSIX includes only runtime files and public documentation", async () =
   );
 });
 
-test("the Marketplace icon is a square PNG of at least 128 pixels", () => {
+test("the Marketplace icon is a square PNG from 128 to 1024 pixels", () => {
   const fs = require("node:fs");
   const manifest = require("../package.json");
   assert.equal(manifest.icon, "media/icon.png");
@@ -33,4 +33,5 @@ test("the Marketplace icon is a square PNG of at least 128 pixels", () => {
   assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
   assert.equal(png.readUInt32BE(16), png.readUInt32BE(20));
   assert.ok(png.readUInt32BE(16) >= 128);
+  assert.ok(png.readUInt32BE(16) <= 1024);
 });

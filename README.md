@@ -40,7 +40,7 @@ The error stays visible after formatting.
 1. Open the `_redirects` file in VS Code.
 2. Open the Command Palette.
 3. Run **Format Document With...**.
-4. Select **Redirects Toolkit — Netlify & Cloudflare**.
+4. Select **Redirects Toolkit for Netlify and Cloudflare**.
 
 The formatter aligns the columns:
 
